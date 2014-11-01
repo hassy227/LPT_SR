@@ -32,8 +32,7 @@ class ENEMY{
   float inertia;
 }
 
-class TABLE{
-
+class TABLE{  //卓球台の情報
   float Xim=2740.0000;  //仮想空間上の台の大きさ
   float Yim=1540.0000;  //仮想空間上の台の大きさ
   
@@ -44,9 +43,9 @@ class TABLE{
   int Xbr=(width+Base.TABLEwidth)/2;                                               //映し出される台の右下x座標
   int Yb =(height+Base.TABLEheight)/2+Base.Yshift;                                 //映し出される台の下y座標
   
-  int LXl =0;
-  int LXr =0;
-  int LY  =0;
+  int LXl =0;                                                                      //映し出される中央の線の左x座標  
+  int LXr =0;                                                                      //映し出される中央の線の右y座標
+  int LY  =0;                                                                      //映し出される中央の線のy座標
 }
 
 class RACKET{
