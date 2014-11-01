@@ -1,5 +1,5 @@
 class BASE2{
-  //解像度によるゲーム表示の変化（解像度を入力すると今後どんなディスプレイをつかっても台が横長にならなくなる、適用しないなら0）
+  //解像度によるゲーム表示の変化（解像度を入力すると今後どんなディスプレイをつかっても起動画面が横長にならなくなる、適用しないなら0）
     int resolutionX=0;
     int resolutionY=0;
   //仮想空間上の台の大きさ(通常 2740.0000:1540.0000)
@@ -13,6 +13,9 @@ class BASE2{
   BspeedMax ボールの最高速度
   BspeedMin ボールの最低速度
 */
+  //共通（これを指定した場合はこの後の設定は無効になる）
+    float ComBspeedMax=0.0;
+    float ComBspeedMin=0.0;
   //レベル１
     float L1BspeedMax=0.0;
     float L1BspeedMin=0.0;
