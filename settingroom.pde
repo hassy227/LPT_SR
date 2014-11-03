@@ -4,7 +4,7 @@ class BASE{
 //台の高さ
   int TABLEheight=height/2;
 //台の手前の長さ
-  int TABLEwidth=width/3;
+  int TABLEwidth=width*2/5;
 //台の手前と奥の長さの比率
   int TABLEtop=6;
   int TABLEbottom=8;
@@ -12,7 +12,10 @@ class BASE{
   int Xshift=0;
   int Yshift=0;
 
-//
+//ボールの大きさ(下辺に来るとき)
+  int BLmax=40;
+//ボールの大きさ(上辺に来るとき)
+  int BLmin=40;
 
 
 //レベる設定

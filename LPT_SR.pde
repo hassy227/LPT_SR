@@ -9,7 +9,7 @@ float BALLareaY;//ボールの仮想の
 int   i=0;
 float BALLareaYTop;
 
-
+//配列
   BASE Base;
   BASE2 Base2;
   Wiimote wiimote;//Wiiリモコンを使うために必要な宣言！
@@ -60,17 +60,24 @@ void draw() {
   
   line(table.LXl,table.LY,table.LXr,table.LY);//中央線の表示
   
-
-  
-  
    rate.rates();//作業用の動作
 }
+
 //仮想y座標から画面上のy座標を表示させる
 int ballYim_Y(float Yim){
     return int(pow(Yim,2)*(200.0*BALLareaYTop-225.0*table.Yt+25.0*table.Yb)/(18.0*pow(BALLareaY,2))
            -      (Yim  )*(400.0*BALLareaYTop-405.0*table.Yt+5.0*table.Yb)/(36.0*    BALLareaY   )
            +              (BALLareaYTop));
 }
+
+
+//仮想x座標と画面上のy座標から画面上のx座標を表示させる
 int ballXim_X(float Xim,int Y){
-    return int((Xim/table.Xim)*(Y*(table.XT-table.XB)/(table.Yt-table.Yb)+(table.XB*table.Yt-table.XT*table.Yb)/(table.Yt-table.Yb))/2.0+width/2.0);
+    return int((Xim/table.Xim)
+              *(Y*(table.XT-table.XB)/(table.Yt-table.Yb)+(table.XB*table.Yt-table.XT*table.Yb)/(table.Yt-table.Yb))
+               +width/2.0);
+}
+
+int ballBIG(int Y){
+  return int((Y+(table.XT*table.Yb-table.XB*table.Yt)/(table.XB-table.XT))*Base.BLmax/(table.Yb+(table.XT*table.Yb-table.XB*table.Yt)/(table.XB-table.XT)));
 }

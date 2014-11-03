@@ -1,3 +1,4 @@
+
 class CREATING_RATE{
   int Xs=Base.Xshift;
   int Ys=Base.Yshift;
@@ -27,18 +28,27 @@ class CREATING_RATE{
        text(ballYim_Y(BALLareaY*0.1*n),WB-40,ballYim_Y(BALLareaY*0.1*n));//y座標
      }
      ////////////////////////////////////////////////////
-     ball.Xim=table.Xim;
+     
 
      
-     if(i==0){
-     ball.Yim+=20;
-    }else if(i==1){
+     if(i%2==0){
+     ball.Yim+=20;     
+    }else if(i%2==1){
       ball.Yim-=20;
     }
-      if(ball.Yim<=0&&i==1)i=0;
-      if(ball.Yim>=BALLareaY&&i==0)i=1;
+      if(i/2==0){
+     ball.Xim+=10;     
+    }else if(i/2==1){
+      ball.Xim-=10;
+    }
+      if(ball.Yim<=0&&i%2==1)i-=1;
+      if(ball.Yim>=BALLareaY&&i%2==0)i+=1;
+      if(ball.Xim<=-table.Xim/2&&i/2==1)i-=2;
+      if(ball.Xim>=table.Xim/2&&i/2==0)i+=2;
+      
       text(ball.Yim,100,100);
-      ellipse(ballXim_X(ball.Xim,ballYim_Y(ball.Yim)),ballYim_Y(ball.Yim),16,16);//
+      text(ballBIG(ballYim_Y(ball.Yim)),100,120);
+      ellipse(ballXim_X(ball.Xim,ballYim_Y(ball.Yim)),ballYim_Y(ball.Yim),ballBIG(ballYim_Y(ball.Yim)),ballBIG(ballYim_Y(ball.Yim)));//
   ////////////////////////////////////////////////////////
      stroke(0);
      fill(255);
