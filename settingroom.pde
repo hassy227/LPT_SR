@@ -13,9 +13,9 @@ class BASE{
   int Yshift=0;
 
 //ボールの大きさ(下辺に来るとき)
-  int BLmax=40;
+  int BLbig=40;
 //ボールの大きさ(上辺に来るとき)
-  int BLmin=40;
+  int BLsml=40;
 
 
 //レベる設定
