@@ -2,9 +2,17 @@
 class CREATING_RATE{
   int Xs=Base.Xshift;
   int Ys=Base.Yshift;
-  int O_I=1;
+  int O_I=1;//0にするとrates
   int WB=width*3/5+Base.Xshift;
- void rates(){
+  
+  int o;
+  int p;
+  
+  void adjestmentSetup(){
+  
+  }
+  
+ void adjestmentDraw(){
    if(O_I!=0){
       
       stroke(192,0,0);
@@ -23,9 +31,9 @@ class CREATING_RATE{
        
        ///////////////////////////////////////////////////////////
      for(int n=0;n<=10;n++){
-       ellipse(WB,ballYim_Y(ball.areaY*0.1*n,table),15+n,15+n);//ボールのエリアを十分割した時の位置
-       text(n*0.1,8+WB,ballYim_Y(ball.areaY*0.1*n,table));
-       text(ballYim_Y(ball.areaY*0.1*n,table),WB-40,ballYim_Y(ball.areaY*0.1*n,table));//y座標
+       ellipse(WB,ballYim_Y(ball.areaY*0.1*n),15+n,15+n);//ボールのエリアを十分割した時の位置
+       text(n*0.1,8+WB,ballYim_Y(ball.areaY*0.1*n));
+       text(ballYim_Y(ball.areaY*0.1*n),WB-40,ballYim_Y(ball.areaY*0.1*n));//y座標
      }
      ////////////////////////////////////////////////////
      
@@ -46,13 +54,13 @@ class CREATING_RATE{
       if(ball.Xim<=-table.Xim/2&&i/2==1)i-=2;
       if(ball.Xim>=table.Xim/2&&i/2==0)i+=2;
       
-      text(ball.Yim,100,100);
-      text(ballBIG(ballYim_Y(ball.Yim,table),table),100,120);
-      ellipse(ballXim_X(ball.Xim,ballYim_Y(ball.Yim,table)),ballYim_Y(ball.Yim,table),ballBIG(ballYim_Y(ball.Yim,table),table),ballBIG(ballYim_Y(ball.Yim,table)));//
+      
+      text(Base.TABLEwidth,100,100);
+      text(ballBIG(ballYim_Y(ball.Yim)),100,140);
+      ellipse(ballXim_X(ball.Xim,ballYim_Y(ball.Yim)),ballYim_Y(ball.Yim),ballBIG(ballYim_Y(ball.Yim)),ballBIG(ballYim_Y(ball.Yim)));//
   ////////////////////////////////////////////////////////
      stroke(0);
      fill(255);
    }
-   return;
  }
 }

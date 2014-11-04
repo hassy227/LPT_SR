@@ -38,8 +38,8 @@ class ENEMY{
 }
 
 class TABLE{  //卓球台の情報
-  float Xim=1540.0000;  //仮想空間上の台の大きさ
-  float Yim=2740.0000;  //仮想空間上の台の大きさ
+  float Xim=Base2.tableXim;  //仮想空間上の台の大きさ
+  float Yim=Base2.tableYim;  //仮想空間上の台の大きさ
   
   int Xtl=(width-Base.TABLEwidth*Base.TABLEtop/Base.TABLEbottom)/2+Base.Xshift;    //映し出される台の左上x座標
   int Xtr=(width+Base.TABLEwidth*Base.TABLEtop/Base.TABLEbottom)/2+Base.Xshift;    //映し出される台の右上x座標

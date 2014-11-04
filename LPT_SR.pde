@@ -26,6 +26,13 @@ void setup() {
 
   Base2 = new BASE2();
   Base =new BASE();
+  //台が横長にならないように設定
+  if(Base2.resolutionX>0&&Base2.resolutionY>0){
+    Base.TABLEwidth=int(float(Base.TABLEwidth)*height*Base2.resolutionX/width/Base2.resolutionY);
+    //設定した台の下辺の長さ*(画面横の長さ/画面縦の長さ)/(元のディスプレイの横の長さ/元のディスプレイの縦の長さ)
+  }
+  
+  
   wiimote = new Wiimote(this);//Wiiリモコンを使うために必要な宣言！
   ball =new BALL();
   table =new TABLE();
@@ -34,9 +41,13 @@ void setup() {
   ball.areaY=table.Yim*1.25;  //ボールの動く範囲の長さ=仮想空間上の卓球台の縦の長さ*1.25
   ball.areaYtop=table.Yt-(abs(table.Yb-table.Yt)*Base.TABLEtop/Base.TABLEbottom/10); //ボールの動く上の範囲
   
+  if(Base.BLbig==-1)Base.BLbig=int(float(Base.BLsml)*Base.TABLEbottom/Base.TABLEtop);
+  if(Base.BLsml==-1)Base.BLsml=int(float(Base.BLbig)*Base.TABLEtop/Base.TABLEbottom);
+  
   //中央線の位置
-    tableCenter(table,ball);
-           ball.Yim=0;
+    tableCenter();
+    
+    rate.adjestmentSetup();//作業用の動作
 }
 void draw() {
   background(128,128,128);//背景色の表示
@@ -46,7 +57,7 @@ void draw() {
   
   line(table.LXl,table.LY,table.LXr,table.LY);//中央線の表示
   
-   rate.rates();//作業用の動作
+   rate.adjestmentDraw();//作業用の動作
 }
 
 
