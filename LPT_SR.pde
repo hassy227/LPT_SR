@@ -42,11 +42,10 @@ void setup() {
   rate =new CREATING_RATE();
   
   ball.areaY=table.Yim*1.25;  //ボールの動く範囲の長さ=仮想空間上の卓球台の縦の長さ*1.25
-  ball.areaYtop=table.Yt-(abs(table.Yb-table.Yt)*Base.TABLEtop/Base.TABLEbottom/10); //ボールの動く上の範囲
+  ball.areaYtop=table.Yt-(table.YY/27); //ボールの動く上の範囲
   
   if(Base.BLbig==-1)Base.BLbig=int(float(Base.BLsml)*Base.TABLEbottom/Base.TABLEtop);
   if(Base.BLsml==-1)Base.BLsml=int(float(Base.BLbig)*Base.TABLEtop/Base.TABLEbottom);
-  
   //中央線の位置
     tableCenter();
     
@@ -59,6 +58,10 @@ void draw() {
   table.Xbr, table.Yb, table.Xbl, table.Yb);//卓球台の表示
   
   line(table.LXl,table.LY,table.LXr,table.LY);//中央線の表示
+  
+  rect(table.Xbl,(table.Yb+ballYim_Y(ball.areaY))/2.0,table.XB/2.0,ballYim_Y(ball.areaY)-table.Yb);
+  rect((table.Xbl+table.Xbr)/2,(table.Yb+ballYim_Y(ball.areaY))/2.0,table.XB/2.0,ballYim_Y(ball.areaY)-table.Yb);
+  rect(table.Xbr,(table.Yb+ballYim_Y(ball.areaY))/2.0,table.XB/2.0,ballYim_Y(ball.areaY)-table.Yb);
   
    rate.adjestmentDraw();//作業用の動作
 }
