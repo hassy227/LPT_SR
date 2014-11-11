@@ -17,7 +17,6 @@ int ballBIG(int Y){
   if(0>=big)return 1;
   
   return big;
-             //
 }
 //卓球台の中央線の情報を入力する
 void tableCenter(){

@@ -54,10 +54,12 @@ void setup() {
 void draw() {
   background(128,128,128);//背景色の表示
   
+  
   quad(table.Xtl, table.Yt, table.Xtr, table.Yt, 
   table.Xbr, table.Yb, table.Xbl, table.Yb);//卓球台の表示
   
-  line(table.LXl,table.LY,table.LXr,table.LY);//中央線の表示
+  //line(table.LXl,table.LY,table.LXr,table.LY);//中央線の表示
+  rect(table.LXl,table.LY,table.LXr,table.LY);//中央線の表示
   
   rect(table.Xbl,(table.Yb+ballYim_Y(ball.areaY))/2.0,table.XB/2.0,ballYim_Y(ball.areaY)-table.Yb);
   rect((table.Xbl+table.Xbr)/2,(table.Yb+ballYim_Y(ball.areaY))/2.0,table.XB/2.0,ballYim_Y(ball.areaY)-table.Yb);
