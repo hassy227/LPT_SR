@@ -1,3 +1,17 @@
+//背景を設定する
+void SetBack(BASE Base){
+  if(Base.Back!=null){
+    image(Base.Back,width/2,height/2,width,height);
+    return;
+  }
+  if(Base.BC<0||Base.BC>255 ){
+    background(Base.BR,Base.BG,Base.BB);
+  }else{
+    background(Base.BC);
+  }
+  return;
+}
+
 //仮想y座標から画面上のy座標を表示させる
 int ballYim_Y(float Yim){
       return int(pow(Yim,2)*(200.0*ball.areaYtop-225.0*table.Yt+25.0*table.Yb)/(18.0*pow(ball.areaY,2))

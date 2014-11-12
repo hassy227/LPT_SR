@@ -17,6 +17,7 @@ class CREATING_RATE{
       
       stroke(192,0,0);
       fill(255,0,0);
+      /*
        line(width/2,
             //卓球台の縦２直線が交わる時のy座標の式{上辺xの長さ:(上辺y-?)=下辺xの長さ:(下辺y-?)}
             -(table.XT*table.Yb-table.XB*table.Yt)/(table.XB-table.XT),
@@ -36,7 +37,7 @@ class CREATING_RATE{
        text(ballYim_Y(ball.areaY*0.05*n),WB-40,ballYim_Y(ball.areaY*0.05*n));//y座標
      }
      ////////////////////////////////////////////////////
-     
+     */
 
      
      if(i%2==0){
