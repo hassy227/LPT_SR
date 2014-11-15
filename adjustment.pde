@@ -16,7 +16,12 @@ class CREATING_RATE{
    if(O_I!=0){
       
       stroke(192,0,0);
-      fill(255,0,0);
+      fill(255,64,64);
+      
+     rect(table.Xtl,(table.Yt+ballYim_Y(ball.areaY*0.15))/2.0,table.XT/2.0,-ballYim_Y(ball.areaY*0.15)+table.Yt);
+     rect((table.Xtl+table.Xtr)/2,(table.Yt+ballYim_Y(ball.areaY*0.15))/2.0,table.XT/2.0,-ballYim_Y(ball.areaY*0.15)+table.Yt);
+     rect(table.Xtr,(table.Yt+ballYim_Y(ball.areaY*0.15))/2.0,table.XT/2.0,-ballYim_Y(ball.areaY*0.15)+table.Yt);
+      
       /*
        line(width/2,
             //卓球台の縦２直線が交わる時のy座標の式{上辺xの長さ:(上辺y-?)=下辺xの長さ:(下辺y-?)}
@@ -29,7 +34,7 @@ class CREATING_RATE{
             -(table.XT*table.Yb-table.XB*table.Yt)/(table.XB-table.XT),
             0,
             ((table.Yb-table.Yt)*width-table.XT*table.Yb+table.XB*table.Yt)/(table.XB-table.XT));
-       
+       */
        ///////////////////////////////////////////////////////////
      for(int n=0;n<=20;n++){
        ellipse(WB,ballYim_Y(ball.areaY*0.05*n),ballBIG(ballYim_Y(ball.areaY*0.05*n)),ballBIG(ballYim_Y(ball.areaY*0.05*n)));//ボールのエリアを十分割した時の位置
@@ -37,28 +42,24 @@ class CREATING_RATE{
        text(ballYim_Y(ball.areaY*0.05*n),WB-40,ballYim_Y(ball.areaY*0.05*n));//y座標
      }
      ////////////////////////////////////////////////////
-     */
+
 
      
-     if(i%2==0){
-     ball.Yim+=20;     
-    }else if(i%2==1){
-      ball.Yim-=20;
-    }
-      if(i/2==0){
-     ball.Xim+=10;     
-    }else if(i/2==1){
-      ball.Xim-=10;
-    }
-      if(ball.Yim<=0&&i%2==1)i-=1;
-      if(ball.Yim>=ball.areaY&&i%2==0)i+=1;
-      if(ball.Xim<=-table.Xim/2&&i/2==1)i-=2;
-      if(ball.Xim>=table.Xim/2&&i/2==0)i+=2;
+     ball.Yim+=ball.YS;     
+     ball.Xim+=ball.XS;
+     if(ball.Yim<= ball.areaY*0.2 &&ball.YS<0)ball.YS*=-1;
+     if(ball.Yim>= ball.areaY*0.8 &&ball.YS>0)ball.YS*=-1;
+     if(ball.Xim<=-table.Xim /2&&ball.XS<0)ball.XS*=-1;
+     if(ball.Xim>= table.Xim /2&&ball.XS>0)ball.XS*=-1;
       
       
       text(Base.TABLEwidth,100,100);
-      text(ballBIG(ballYim_Y(ball.Yim)),100,140);
+      text(ballYim_ZimS(ball.Yim,ball.YS),100,140);
+      text(ballYim_ZimS(ball.areaY*0.25,1),100,160);
+      text(ballYim_ZimS(ball.areaY*0.75,0),100,180);
+      text(ballYim_ZimS(ball.areaY*0.50,1),100,200);
       ellipse(ballXim_X(ball.Xim,ballYim_Y(ball.Yim)),ballYim_Y(ball.Yim),ballBIG(ballYim_Y(ball.Yim)),ballBIG(ballYim_Y(ball.Yim)));//
+      ellipse(width/6,height/2-ballYim_ZimS(ball.Yim,ball.YS),ballBIG(ballYim_Y(ball.Yim)),ballBIG(ballYim_Y(ball.Yim)));//
   ////////////////////////////////////////////////////////
      stroke(0);
      fill(255);

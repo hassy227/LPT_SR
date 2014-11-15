@@ -1,30 +1,23 @@
 //ボールの情報
 class BALL{
-  BASE base;
-
-  int X=0;        //ボールが表示されるx座標
-  int Y=0;        //ボールが表示されるy座標
+  int X=0;          //ボールが表示されるx座標
+  int Y=0;          //ボールが表示されるy座標
   
   float Xim=0;      //ボールの仮想空間上のx座標
   float Yim=0;      //ボールの仮想空間上のy座標
   float Zim=0;      //ボールの仮想空間上のz座標
   
-  float Xbs=0;      //ボールの補正前のxスピード
-  float Ybs=0;      //ボールの補正前のyスピード
-  float Zbs=0;      //ボールの補正前のzスピード
-  
-  float Xas=0;      //ボールの補正後のxスピード
-  float Yas=0;      //ボールの補正後のyスピード
-  float Zas=0;      //ボールの補正後のzスピード
+  float XS=0;       //ボールのxスピード
+  float YS=0;       //ボールのyスピード
+  float ZS=0;       //ボールのzスピード
   
   float BDz;
   
   float biggest;    //ボールの大きさ    
-  
   float Dsp;
   
-  float areaY;      //ボールが動けるy座標の長さ
-  float areaYtop;   //ボールが動けるy座標の上辺
+  float areaY;      //ボールが動けるy座標の長さ（仮想）
+  float areaYtop;   //ボールが動けるy座標の上辺（画面）
   float areaX;      //ボールが動けるx座標の長さ
   float areaXtop;   //ボールが動けるx座標の上辺
 };

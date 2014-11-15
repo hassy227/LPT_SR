@@ -41,14 +41,15 @@ void setup() {
   table =new TABLE();
   rate =new CREATING_RATE();
   
-  ball.areaY=table.Yim*1.25;  //ボールの動く範囲の長さ=仮想空間上の卓球台の縦の長さ*1.25
-  ball.areaYtop=table.Yt-(table.YY/27); //ボールの動く上の範囲
+  ball.areaY=table.Yim*2.0;  //ボールの動く範囲の長さ=仮想空間上の卓球台の縦の長さ*倍率x
+  ball.areaYtop=table.Yt-(table.YY*625.0/5625.0); //ボールの動く範囲の上辺=テーブル上辺-(テーブルの長さ *((1/倍率x)/2)^2 /((1/倍率x)/2+(1/倍率x))^2 )
   
   if(Base.BLbig==-1)Base.BLbig=int(float(Base.BLsml)*Base.TABLEbottom/Base.TABLEtop);
   if(Base.BLsml==-1)Base.BLsml=int(float(Base.BLbig)*Base.TABLEtop/Base.TABLEbottom);
   //中央線の位置
     tableCenter();
-    
+    ball.YS=20.0;
+    ball.XS=10.0;
     rate.adjestmentSetup();//作業用の動作
 }
 void draw() {
@@ -62,9 +63,9 @@ void draw() {
   quad(table.LXl,table.LY,table.LXr,table.LY
       ,table.LXr-width/720,table.LY-height/30,table.LXl+width/720,table.LY-height/30);//中央線の表示
   
-  rect(table.Xbl,(table.Yb+ballYim_Y(ball.areaY))/2.0,table.XB/2.0,ballYim_Y(ball.areaY)-table.Yb);
-  rect((table.Xbl+table.Xbr)/2,(table.Yb+ballYim_Y(ball.areaY))/2.0,table.XB/2.0,ballYim_Y(ball.areaY)-table.Yb);
-  rect(table.Xbr,(table.Yb+ballYim_Y(ball.areaY))/2.0,table.XB/2.0,ballYim_Y(ball.areaY)-table.Yb);
+  rect(table.Xbl,(table.Yb+ballYim_Y(ball.areaY*0.85))/2.0,table.XB/2.0,ballYim_Y(ball.areaY*0.85)-table.Yb);
+  rect((table.Xbl+table.Xbr)/2,(table.Yb+ballYim_Y(ball.areaY*0.85))/2.0,table.XB/2.0,ballYim_Y(ball.areaY*0.85)-table.Yb);
+  rect(table.Xbr,(table.Yb+ballYim_Y(ball.areaY*0.85))/2.0,table.XB/2.0,ballYim_Y(ball.areaY*0.85)-table.Yb);
   
    rate.adjestmentDraw();//作業用の動作
 }
