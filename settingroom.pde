@@ -1,6 +1,5 @@
 
 class BASE{
-
 //台の高さ
   int TABLEheight=height/3;
   
@@ -11,7 +10,7 @@ class BASE{
   int TABLEtop=5;
   int TABLEbottom=8;
   
-//台のずらし
+//台のずらし(画面比で指定することを勧める)
   int Xshift=0;
   int Yshift=0;
   

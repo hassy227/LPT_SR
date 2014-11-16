@@ -5,7 +5,7 @@ float[] LEVELinertia= new float[5];
 
 int   i=0;
 
-//配列
+//構造体(メイン)
   BASE Base;
   BASE2 Base2;
   Wiimote wiimote;//Wiiリモコンを使うために必要な宣言！
@@ -23,33 +23,11 @@ void setup() {
   ellipseMode(CENTER);
   imageMode(CENTER);
   textMode(CENTER);
-
-  Base2 = new BASE2();
-  Base =new BASE();
-  //台が横長にならないように設定
-  if(Base2.resolutionX>0&&Base2.resolutionY>0){
-    Base.TABLEwidth=int(float(Base.TABLEwidth)*height*Base2.resolutionX/width/Base2.resolutionY);
-    //設定した台の下辺の長さ*(画面横の長さ/画面縦の長さ)/(元のディスプレイの横の長さ/元のディスプレイの縦の長さ)
-    if(Base.BLbig!=-1)Base.BLbig=int(float(Base.BLbig)*height/Base2.resolutionY);
-    if(Base.BLsml!=-1)Base.BLsml=int(float(Base.BLsml)*height/Base2.resolutionY);
-    //ボールの大きさ調節
-  }
-  
-  
   wiimote = new Wiimote(this);//Wiiリモコンを使うために必要な宣言！
-  ball =new BALL();
-  table =new TABLE();
+  //台が横長にならないように設定
+  SetStructure();
   rate =new CREATING_RATE();
-  
-  ball.areaY=table.Yim*2.0;  //ボールの動く範囲の長さ=仮想空間上の卓球台の縦の長さ*倍率x
-  ball.areaYtop=table.Yt-(table.YY*625.0/5625.0); //ボールの動く範囲の上辺=テーブル上辺-(テーブルの長さ *((1/倍率x)/2)^2 /((1/倍率x)/2+(1/倍率x))^2 )
-  
-  if(Base.BLbig==-1)Base.BLbig=int(float(Base.BLsml)*Base.TABLEbottom/Base.TABLEtop);
-  if(Base.BLsml==-1)Base.BLsml=int(float(Base.BLbig)*Base.TABLEtop/Base.TABLEbottom);
-  //中央線の位置
-    tableCenter();
-    ball.YS=20.0;
-    ball.XS=10.0;
+
     rate.adjestmentSetup();//作業用の動作
 }
 void draw() {

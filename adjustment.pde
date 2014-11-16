@@ -1,19 +1,22 @@
-
+//作成用の
 class CREATING_RATE{
   int Xs=Base.Xshift;
   int Ys=Base.Yshift;
-  int O_I=1;//0にするとrates
+  boolean O_I=true;//trueだと関数が起動させる、必要なくなったらfalseにする
   int WB=width*3/5+Base.Xshift;
   
   int o;
   int p;
   
   void adjestmentSetup(){
-  
+    if(O_I){
+      ball.YS=20.0;
+      ball.XS=10.0;
+    }
   }
   
  void adjestmentDraw(){
-   if(O_I!=0){
+   if(O_I){
       
       stroke(192,0,0);
       fill(255,64,64);
@@ -36,29 +39,36 @@ class CREATING_RATE{
             ((table.Yb-table.Yt)*width-table.XT*table.Yb+table.XB*table.Yt)/(table.XB-table.XT));
        */
        ///////////////////////////////////////////////////////////
+       /*
      for(int n=0;n<=20;n++){
        ellipse(WB,ballYim_Y(ball.areaY*0.05*n),ballBIG(ballYim_Y(ball.areaY*0.05*n)),ballBIG(ballYim_Y(ball.areaY*0.05*n)));//ボールのエリアを十分割した時の位置
        text(n*0.05,8+WB,ballYim_Y(ball.areaY*0.05*n));
        text(ballYim_Y(ball.areaY*0.05*n),WB-40,ballYim_Y(ball.areaY*0.05*n));//y座標
-     }
+     }*/
      ////////////////////////////////////////////////////
 
 
      
      ball.Yim+=ball.YS;     
      ball.Xim+=ball.XS;
-     if(ball.Yim<= ball.areaY*0.2 &&ball.YS<0)ball.YS*=-1;
-     if(ball.Yim>= ball.areaY*0.8 &&ball.YS>0)ball.YS*=-1;
+     if(ball.Yim<= ball.areaY*0.2 &&ball.YS<0){ball.YS*=-1;ball.Yim=ball.areaY*0.25;}
+     if(ball.Yim>= ball.areaY*0.8 &&ball.YS>0){ball.YS*=-1;ball.Yim=ball.areaY*0.75;}
      if(ball.Xim<=-table.Xim /2&&ball.XS<0)ball.XS*=-1;
      if(ball.Xim>= table.Xim /2&&ball.XS>0)ball.XS*=-1;
       
+      stroke(0,0,192);
+      fill(64,64,255);
+      ellipse(width/6,height/2,ballBIG(ballYim_Y(ball.Yim)),ballBIG(ballYim_Y(ball.Yim)));
+      ellipse(ballXim_X(ball.Xim,ballYim_Y(ball.Yim)),ballYim_Y(ball.Yim),ballBIG(ballYim_Y(ball.Yim)),ballBIG(ballYim_Y(ball.Yim)));
+      stroke(192,0,0);
+      fill(255,64,64);
       
       text(Base.TABLEwidth,100,100);
       text(ballYim_ZimS(ball.Yim,ball.YS),100,140);
       text(ballYim_ZimS(ball.areaY*0.25,1),100,160);
-      text(ballYim_ZimS(ball.areaY*0.75,0),100,180);
+      text(ballYim_ZimS(ball.areaY*0.75,1),100,180);
       text(ballYim_ZimS(ball.areaY*0.50,1),100,200);
-      ellipse(ballXim_X(ball.Xim,ballYim_Y(ball.Yim)),ballYim_Y(ball.Yim),ballBIG(ballYim_Y(ball.Yim)),ballBIG(ballYim_Y(ball.Yim)));//
+      ellipse(ballXim_X(ball.Xim,ballYim_Y(ball.Yim)),ballYim_Y(ball.Yim)-ballYim_ZimS(ball.Yim,ball.YS),ballBIG(ballYim_Y(ball.Yim)),ballBIG(ballYim_Y(ball.Yim)));//
       ellipse(width/6,height/2-ballYim_ZimS(ball.Yim,ball.YS),ballBIG(ballYim_Y(ball.Yim)),ballBIG(ballYim_Y(ball.Yim)));//
   ////////////////////////////////////////////////////////
      stroke(0);

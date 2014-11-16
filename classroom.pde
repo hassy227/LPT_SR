@@ -13,16 +13,15 @@ class BALL{
   
   float BDz;
   
-  float biggest;    //ボールの大きさ    
+  float big;    //ボールの大きさ
+  float sml;    //ボールの大きさ  
   float Dsp;
   
   float areaY;      //ボールが動けるy座標の長さ（仮想）
   float areaYtop;   //ボールが動けるy座標の上辺（画面）
   float areaX;      //ボールが動けるx座標の長さ
-  float areaXtop;   //ボールが動けるx座標の上辺
 };
 class ENEMY{
-  
   int LEVEL=3;
   float MAXspeed;
   float ADDspeed;
@@ -31,24 +30,24 @@ class ENEMY{
 }
 
 class TABLE{  //卓球台の情報
-  float Xim=Base2.tableXim;  //仮想空間上の台の大きさ
-  float Yim=Base2.tableYim;  //仮想空間上の台の大きさ
+  float Xim;  //仮想空間上の台の大きさ
+  float Yim;  //仮想空間上の台の大きさ
   
-  int Xtl=(width-Base.TABLEwidth*Base.TABLEtop/Base.TABLEbottom)/2+Base.Xshift;    //映し出される台の左上x座標
-  int Xtr=(width+Base.TABLEwidth*Base.TABLEtop/Base.TABLEbottom)/2+Base.Xshift;    //映し出される台の右上x座標
-  int Yt =(height-Base.TABLEheight)/2+Base.Yshift;                                 //映し出される台の上y座標
-  int Xbl=(width-Base.TABLEwidth)/2+Base.Xshift;                                   //映し出される台の左下x座標
-  int Xbr=(width+Base.TABLEwidth)/2+Base.Xshift;                                   //映し出される台の右下x座標
-  int Yb =(height+Base.TABLEheight)/2+Base.Yshift;                                 //映し出される台の下y座標
+  int Xtl;    //映し出される台の左上x座標
+  int Xtr;    //映し出される台の右上x座標
+  int Yt ;                                 //映し出される台の上y座標
+  int Xbl;                                   //映し出される台の左下x座標
+  int Xbr;                                   //映し出される台の右下x座標
+  int Yb;                                 //映し出される台の下y座標
   
-  int XT =abs(Xtl-Xtr);                                                            //上辺xの長さ
-  int XB =abs(Xbl-Xbr);                                                            //下辺xの長さ
-  int YY =abs(Yt -Yb );                                                            //上下辺yの長さ
+  int XT = 0;                                                            //上辺xの長さ
+  int XB = 0;                                                            //下辺xの長さ
+  int YY = 0;                                                            //上下辺yの長さ
   
-  int LXl =0;                                                                      //映し出される中央の線の左x座標  
-  int LXr =0;                                                                      //映し出される中央の線の右x座標   
-  int LX  =0;
-  int LY  =0;                                                                      //映し出される中央の線のy座標   
+  int LXl = 0;                                                                      //映し出される中央の線の左x座標  
+  int LXr = 0;                                                                      //映し出される中央の線の右x座標   
+  int LX  = 0;
+  int LY  = 0;                                                                      //映し出される中央の線のy座標   
   
 }
 

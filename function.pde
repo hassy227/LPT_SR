@@ -48,15 +48,11 @@ float ballYim_ZimS(float Yim,float YS){
  text(ball.areaY*0.5,200,120);
   if(YS>0)Yims=Yim;
   if(YS<0)Yims=ball.areaY-Yim;
-  if(Yims>BZ)Yims-=Base2.ballBound;
-  /*
+  if(Yims>BZ)Yims=BZ*2.0-Yims;
+
   return  (HZ -SZ*TT +SZ*BZ)                                  /(pow(TT,2.0)-pow(BZ,2.0))*pow(Yims,2.0)
-         + BZ                                                                           *    Yims
+         + SZ                                                                           *    Yims
          -(pow(BZ,2)*HZ +BZ*SZ*pow(TT,2.0) -pow(BZ,2.0)*SZ*TT)/(pow(TT,2.0)-pow(BZ,2.0));
-  */
-  return -(SZ)/(TT+BZ)*pow(Yims,2.0)
-         + SZ *Yims
-         -(BZ*SZ*TT)/(TT+BZ);
 }
 
 //卓球台の中央線の情報を入力する
