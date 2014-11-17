@@ -11,6 +11,21 @@ void SetBack(BASE Base){
   }
   return;
 }
+//処理によってアップデートすること
+void GameUpdate(TABLE table,BALL ball){
+  ball.Xim += ball.XS;
+  ball.Yim += ball.YS;
+  ball.Zim += ball.ZS;
+  
+  ball.Ysdo = ballYim_Y(ball.Yim);
+  ball.Zim  = ballYim_ZimS(ball.Yim,ball.YS);
+  ball.mY   = ballZim_mY(ball.Zim,ball.Ysdo);
+  ball.Y    = ball.Ysdo-ball.mY;
+  ball.Xsdo = ballXim_X(ball.Xim,ball.Ysdo);
+  ball.X    = ballXim_X(ball.Xim,ball.Y);
+  ball.B    = ballBIG(ballYim_Y(ball.Yim));
+  
+}
 
 //仮想y座標から画面上のy座標に変換
 int ballYim_Y(float Yim){
@@ -28,7 +43,7 @@ int ballYim_Y(float Yim){
 int ballXim_X(float Xim,int Y){
     return int((Xim/table.Xim)
               *(Y*(table.XT-table.XB)/(table.Yt-table.Yb)+(table.XB*table.Yt-table.XT*table.Yb)/(table.Yt-table.Yb))
-               +width/2.0);
+               +table.CE);
 }
 //画面上のy座標から玉の大きさを調べる
 int ballBIG(int Y){
@@ -44,8 +59,6 @@ float ballYim_ZimS(float Yim,float YS){
   float SZ=Base2.ballZspeed;//最高上昇速度
   float BZ=Base2.ballBound+TT;//
   float HY=Base2.ballHY;
- text(BZ,200,100);
- text(ball.areaY*0.5,200,120);
   if(YS>0)Yims=Yim;
   if(YS<0)Yims=ball.areaY-Yim;
   if(Yims>BZ)Yims=BZ*2.0-Yims;
@@ -54,6 +67,13 @@ float ballYim_ZimS(float Yim,float YS){
          + SZ                                                                           *    Yims
          -(pow(BZ,2)*HZ +BZ*SZ*pow(TT,2.0) -pow(BZ,2.0)*SZ*TT)/(pow(TT,2.0)-pow(BZ,2.0));
 }
+//仮想z座標と仮想y座標からからボール表示時に引くべきy座標に変換
+int ballZim_mY(float Zim,float Y){
+  int Z=(int)(Zim*(Y-table.CR))/(table.Yb-table.CR);
+  ///if()
+  return Z;
+}
+
 
 //卓球台の中央線の情報を入力する
 void tableCenter(){

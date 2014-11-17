@@ -33,6 +33,7 @@ void setup() {
 void draw() {
   SetBack(Base);
   
+  GameUpdate(table,ball);
   
   quad(table.Xtl, table.Yt, table.Xtr, table.Yt, 
   table.Xbr, table.Yb, table.Xbl, table.Yb);//卓球台の表示

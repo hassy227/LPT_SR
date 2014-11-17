@@ -38,6 +38,9 @@ void settingTable(TABLE table,BASE Base,BASE2 Base2){
   table.Xbl=(width -table.XB)/2+Base.Xshift;                //映し出される台の左下x座標
   table.Xbr=(width +table.XB)/2+Base.Xshift;                //映し出される台の右下x座標
   table.Yb =(height+table.YY)/2+Base.Yshift;                //映し出される台の下y座標
+  
+  table.CR =-(table.XT*table.Yb-table.XB*table.Yt)/(table.XB-table.XT);//卓球台の縦２直線が交わる時のy座標の式{上辺xの長さ:(上辺y-?)=下辺xの長さ:(下辺y-?)}
+  table.CE =width/2+Base.Xshift;//卓球台の縦２直線が交わる時のy座標の式{上辺xの長さ:(上辺y-?)=下辺xの長さ:(下辺y-?)}
 }
 
 void settingBall(BALL ball,TABLE table,BASE Base){
