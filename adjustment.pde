@@ -43,10 +43,6 @@ class CREATING_RATE {
       2*pow(pow(ball.X-table.CE, 2)+pow(ball.Y-table.CR, 2), 0.5), 
       2*pow(pow(ball.X-table.CE, 2)+pow(ball.Y-table.CR, 2), 0.5));
 
-      line(table.CE, 
-      table.CR, 
-      0, 
-      ((table.Yb-table.Yt)*width-table.XT*table.Yb+table.XB*table.Yt)/-(table.XT*table.Yb-table.XB*table.Yt)/(table.XB-table.XT));
 
       fill(255, 64, 64);
       ///////////////////////////////////////////////////////////
@@ -75,8 +71,8 @@ class CREATING_RATE {
 
       stroke(0, 0, 192);
       fill(64, 64, 255);
-      ellipse(ballXim_X(1000, ball.Ysdo), ball.Ysdo, ball.B, ball.B);
-      ellipse(ball.Xsdo, ball.Ysdo, ball.B, ball.B);
+      //ellipse(ballXim_X(1000, ball.Ysdo), ball.Ysdo, ball.B, ball.B);
+      //ellipse(ball.Xsdo, ball.Ysdo, ball.B, ball.B);
       line(table.CE, table.CR, ballXim_X(1000, ballYim_Y(ball.areaY*0.75)), ballYim_Y(ball.areaY*0.75)-ballZim_mY(50.0, ballYim_Y(ball.areaY*0.75)));
       fill(64, 0);
       ellipse(table.CE, -(table.XT*table.Yb-table.XB*table.Yt)/(table.XB-table.XT), 
@@ -87,12 +83,12 @@ class CREATING_RATE {
 
       text(ballZim_mY(ballYim_ZimS(ball.Yim,ball.YS),ball.Ysdo), 100, 100);
       text(ball.Zim,100,120);
-      text(ball.Y, 100, 140);
+      text(ball.B, 100, 140);
       text(ballYim_ZimS(ball.areaY*0.25, 1), 100, 160);
       line(table.CE, table.CR, ballXim_X(1000, ball.Ysdo), ball.Ysdo-ballZim_mY(50.0, ball.Ysdo));
       if (ball.Ysdo==ball.areaY*0.75)fill(0, 255, 0);
-      ellipse(ball.X, ball.Y, ball.B, ball.B);
-      ellipse(ballXim_X(1000, ball.Ysdo), ball.Ysdo-ballZim_mY(50.0, ball.Ysdo), ball.B, ball.B);//
+      //ellipse(ball.X, ball.Y, ball.B, ball.B);
+      //ellipse(ballXim_X(1000, ball.Ysdo), ball.Ysdo-ballZim_mY(50.0, ball.Ysdo), ball.B, ball.B);//
       ////////////////////////////////////////////////////////
       stroke(0);
       fill(255);

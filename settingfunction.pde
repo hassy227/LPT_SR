@@ -5,6 +5,17 @@ void SetStructure(){
   ball =new BALL();
   table =new TABLE();
   
+  backD = new DESIGN();
+  tableD = new DESIGN();
+  netD = new DESIGN();
+  ballD = new DESIGN();
+  ballsdoD = new DESIGN();
+  backgroundDSN(backD);
+  tableDSN(tableD);
+  netDSN(netD);
+  ballDSN(ballD);
+  ballsdoDSN(ballsdoD);
+  
   Resolution(Base,Base2);
   settingTable(table,Base,Base2);
   settingBall(ball,table,Base);
@@ -17,8 +28,8 @@ void Resolution(BASE Base,BASE2 Base2){
     //画面比に合った台の下辺の長さ = 設定した台の下辺の長さ*(画面横の長さ/画面縦の長さ)/(元のディスプレイの横の長さ/元のディスプレイの縦の長さ)
     Base.TABLEwidth=int(float(Base.TABLEwidth)*height*Base2.resolutionX/width/Base2.resolutionY);
     //ボールの大きさ調節
-    if(Base.BLbig!=-1)Base.BLbig=int(float(Base.BLbig)*height/Base2.resolutionY);
-    if(Base.BLsml!=-1)Base.BLsml=int(float(Base.BLsml)*height/Base2.resolutionY);
+    //if(Base.BLbig!=-1)Base.BLbig=int(float(Base.BLbig)*height/Base2.resolutionY);
+    //if(Base.BLsml!=-1)Base.BLsml=int(float(Base.BLsml)*height/Base2.resolutionY);
   }
   return;
 }
@@ -38,14 +49,16 @@ void settingTable(TABLE table,BASE Base,BASE2 Base2){
   table.Xbl=(width -table.XB)/2+Base.Xshift;                //映し出される台の左下x座標
   table.Xbr=(width +table.XB)/2+Base.Xshift;                //映し出される台の右下x座標
   table.Yb =(height+table.YY)/2+Base.Yshift;                //映し出される台の下y座標
+  table.NH =Base2.NetH;                //映し出される台の右下x座標
+  table.NW =Base2.NetW;                //映し出される台の下y座標
   
   table.CR =-(table.XT*table.Yb-table.XB*table.Yt)/(table.XB-table.XT);//卓球台の縦２直線が交わる時のy座標の式{上辺xの長さ:(上辺y-?)=下辺xの長さ:(下辺y-?)}
   table.CE =width/2+Base.Xshift;//卓球台の縦２直線が交わる時のy座標の式{上辺xの長さ:(上辺y-?)=下辺xの長さ:(下辺y-?)}
 }
 
 void settingBall(BALL ball,TABLE table,BASE Base){
-  if(Base.BLbig==-1)Base.BLbig=int(float(Base.BLsml)*Base.TABLEbottom/Base.TABLEtop);
-  if(Base.BLsml==-1)Base.BLsml=int(float(Base.BLbig)*Base.TABLEtop/Base.TABLEbottom);
+  if(Base.BLbig==-1)Base.BLbig=int(float(Base.BLsml)*(table.Yb-table.CR)/(table.Yt-table.CR));
+  if(Base.BLsml==-1)Base.BLsml=int(float(Base.BLbig)*(table.Yt-table.CR)/(table.Yb-table.CR));
   
   ball.big = Base.BLbig;    //ボールの大きさ
   ball.sml = Base.BLsml;    //ボールの大きさ  

@@ -1,16 +1,26 @@
+
 //背景を設定する
-void SetBack(BASE Base){
-  if(Base.Back!=null){
-    image(Base.Back,width/2,height/2,width,height);
+void SetBack(DESIGN Design){
+  if(Design.P!=null){
+    image(Design.P,width/2,height/2,width,height);
     return;
   }
-  if(Base.BC<0||Base.BC>255 ){
-    background(Base.BR,Base.BG,Base.BB);
+  if(Design.W<0||Design.W>255 ){
+    background(Design.R,Design.G,Design.B,Design.I);
   }else{
-    background(Base.BC);
+    background(Design.W,Design.I);
   }
   return;
 }
+void SetColer(DESIGN Design){
+  if(Design.W<0||Design.W>255 ){
+    fill(Design.R,Design.G,Design.B,Design.I);
+  }else{
+    fill(Design.W,Design.I);
+  }
+  return;
+}
+
 //処理によってアップデートすること
 void GameUpdate(TABLE table,BALL ball){
   ball.Xim += ball.XS;
@@ -22,7 +32,7 @@ void GameUpdate(TABLE table,BALL ball){
   ball.mY   = ballZim_mY(ball.Zim,ball.Ysdo);
   ball.Y    = ball.Ysdo-ball.mY;
   ball.Xsdo = ballXim_X(ball.Xim,ball.Ysdo);
-  ball.X    = ballXim_X(ball.Xim,ball.Y);
+  ball.X    = ballXim_X(ball.Xim,ball.Ysdo);
   ball.B    = ballBIG(ballYim_Y(ball.Yim));
   
 }
@@ -70,7 +80,6 @@ float ballYim_ZimS(float Yim,float YS){
 //仮想z座標と仮想y座標からからボール表示時に引くべきy座標に変換
 int ballZim_mY(float Zim,float Y){
   int Z=(int)(Zim*(Y-table.CR))/(table.Yb-table.CR);
-  ///if()
   return Z;
 }
 
@@ -88,5 +97,27 @@ void tableCenter(){
            *(table.LY -table.Yt )  // *(中央線y-  上辺y)
            /(table.Yb -table.Yt )  // /(  上辺y-  上辺y)
            +(table.Xtr          ); // +(上辺右x        )=中央線右x
+}
+//ボールとネットの表示（タイミングを変えるため）
+void BandN(){
+  if(ball.Yim<ball.areaY/2){
+    SetColer(ballsdoD);
+    ellipse(ball.Xsdo, ball.Ysdo, ball.B, ball.B);
+    SetColer(netD);
+    quad(table.LXl,table.LY,table.LXr,table.LY
+      ,table.LXr+table.NW,table.LY-table.NH,table.LXl-table.NW,table.LY-table.NH);//中央線の表示
+     SetColer(ballD);
+    ellipse(ball.X, ball.Y, ball.B, ball.B);
+  }else{
+    SetColer(ballsdoD);
+    ellipse(ball.Xsdo, ball.Ysdo, ball.B, ball.B);
+    SetColer(ballD);
+    ellipse(ball.X, ball.Y, ball.B, ball.B);
+    SetColer(netD);
+    quad(table.LXl,table.LY,table.LXr,table.LY
+      ,table.LXr+table.NW,table.LY-table.NH,table.LXl-table.NW,table.LY-table.NH);//中央線の表示
+  }
+  
+  return;
 }
 
