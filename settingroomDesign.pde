@@ -34,14 +34,30 @@ void netDSN(DESIGN design){
 }
 //ボール
 void ballDSN(DESIGN design){
-   design.W = 255;
-    design.R = 0;
+   design.W = 256;
+    design.R = 255;
     design.G = 0;
     design.B = 0;
    design.I = 255;
 }
 //ボールの影
 void ballsdoDSN(DESIGN design){
+   design.W = 0;
+    design.R = 0;
+    design.G = 0;
+    design.B = 0;
+   design.I = 255;
+}
+
+void judge1(DESIGN design){
+   design.W = 0;
+    design.R = 0;
+    design.G = 0;
+    design.B = 0;
+   design.I = 255;  
+}
+
+void judge2(DESIGN design){
    design.W = 0;
     design.R = 0;
     design.G = 0;

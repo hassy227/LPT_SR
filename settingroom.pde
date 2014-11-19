@@ -21,5 +21,5 @@ class BASE{
 //ボールの大きさ(上辺に来るとき:-1にすると下辺の大きさから台の比率で合わせられる)
   int BLsml=-1;
 //ボールの大きさ(下辺に来るとき:-1にすると上辺の大きさから台の比率で合わせられる)
-  int BLbig=height/40;
+  int BLbig=int(TABLEwidth*40*1.4/Base2.tableXim);
 };

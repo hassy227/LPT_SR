@@ -6,6 +6,11 @@ class BASE2{
     float tableXim=1540.0000;
     float tableYim=2740.0000;
     
+  //フォントサイズ
+   int FontSize = height/42;
+  //フォント名
+   String FontName="MS gothic";
+    
   //ネットの高さ
     int NetH = height/30;
   //ネットの広がり

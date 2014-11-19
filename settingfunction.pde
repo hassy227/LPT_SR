@@ -1,20 +1,35 @@
 //構造体の設定
 void SetStructure(){
-  Base =new BASE();
   Base2 = new BASE2();
-  ball =new BALL();
-  table =new TABLE();
+  Base  = new BASE();
+  ball  = new BALL();
+  table = new TABLE();
   
-  backD = new DESIGN();
-  tableD = new DESIGN();
-  netD = new DESIGN();
-  ballD = new DESIGN();
+  backD    = new DESIGN();
+  tableD   = new DESIGN();
+  netD     = new DESIGN();
+  ballD    = new DESIGN();
   ballsdoD = new DESIGN();
+  
+  common = new LEVEL();
+   level1 = new LEVEL();
+   level2 = new LEVEL();
+   level3 = new LEVEL();
+   level4 = new LEVEL();
+   level5 = new LEVEL();
+  
   backgroundDSN(backD);
   tableDSN(tableD);
   netDSN(netD);
   ballDSN(ballD);
   ballsdoDSN(ballsdoD);
+  
+  COMMON(common);
+   LEVEL1(level1);
+   LEVEL2(level2);
+   LEVEL3(level3);
+   LEVEL4(level4);
+   LEVEL5(level5);
   
   Resolution(Base,Base2);
   settingTable(table,Base,Base2);

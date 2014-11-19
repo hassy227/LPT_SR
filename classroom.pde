@@ -1,3 +1,4 @@
+
 //ボールの情報
 class BALL{
   int X=0;          //ボールが表示されるx座標
@@ -71,4 +72,11 @@ class DESIGN{
     int G = 0;//緑の濃さ
     int B = 0;//青の濃さ
    int I = 0;//色設定時の透明度（0～255で設定）:不透明なら255
+}
+
+class LEVEL{
+  float Espeed    = 0.0;
+  float Einertia  = 0.0;
+  float BspeedMax = 0.0;
+  float BspeedMin = 0.0;
 }

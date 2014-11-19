@@ -38,11 +38,11 @@ class CREATING_RATE {
       0, 
       (table.YY*width-table.XT*table.Yb+table.XB*table.Yt)/(table.XB-table.XT));
 
-      fill(255, 0, 0, 0);
+      fill(255, 0, 0, 0);/*
       ellipse(table.CE, -(table.XT*table.Yb-table.XB*table.Yt)/(table.XB-table.XT), 
       2*pow(pow(ball.X-table.CE, 2)+pow(ball.Y-table.CR, 2), 0.5), 
       2*pow(pow(ball.X-table.CE, 2)+pow(ball.Y-table.CR, 2), 0.5));
-
+*/
 
       fill(255, 64, 64);
       ///////////////////////////////////////////////////////////
@@ -59,11 +59,11 @@ class CREATING_RATE {
       //ball.Yim+=ball.YS;     
       //ball.Xim+=ball.XS;
       if (ball.Yim<= ball.areaY*0.2 &&ball.YS<0) {
-        ball.YS*=-1;
+        ball.YS*=-1;//random(-1.12,-0.9);
         ball.Yim=ball.areaY*0.25;
       }
       if (ball.Yim>= ball.areaY*0.8 &&ball.YS>0) {
-        ball.YS*=-1;
+        ball.YS*=-1;//random(-1.12,-0.9);
         ball.Yim=ball.areaY*0.75;
       }
       if (ball.Xim<=-table.Xim /2&&ball.XS<0)ball.XS*=-1;
