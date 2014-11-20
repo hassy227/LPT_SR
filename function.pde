@@ -35,6 +35,8 @@ void GameUpdate(TABLE table,BALL ball){
   ball.X    = ballXim_X(ball.Xim,ball.Ysdo);
   ball.B    = ballBIG(ballYim_Y(ball.Yim));
   
+  judge.nowJzone=nowJzone(ball);
+  
 }
 
 //仮想y座標から画面上のy座標に変換
@@ -64,11 +66,11 @@ int ballBIG(int Y){
 //仮想y座標から仮想z座標に変換(簡略型)
 float ballYim_ZimS(float Yim,float YS){
   float Yims=0;
-   float TT=(ball.areaY*0.25);//卓球台のトップ（仮想）
-  float HZ=Base2.ballHZ;
-  float SZ=Base2.ballZspeed;//最高上昇速度
-  float BZ=Base2.ballBound+TT;//
-  float HY=Base2.ballHY;
+  float TT=(ball.areaY*0.25);//卓球台のトップ（仮想）
+  float HZ=Base.ballHZ;
+  float SZ=Base.ballZspeed;//最高上昇速度
+  float BZ=Base.ballBound+TT;//
+  float HY=Base.ballHY;
   if(YS>0)Yims=Yim;
   if(YS<0)Yims=ball.areaY-Yim;
   if(Yims>BZ)Yims=BZ*2.0-Yims;
@@ -117,10 +119,37 @@ void BandN(){
     quad(table.LXl,table.LY,table.LXr,table.LY
       ,table.LXr+table.NW,table.LY-table.NH,table.LXl-table.NW,table.LY-table.NH);//中央線の表示
   }
-  
   return;
 }
 
+void setJudgezone(){
+  rectMode(CORNERS);
+  SetColer(judge4D);
+  for(int i=0;i<judge.P;i++)rect(width/2-judge.T/2+i*judge.T/judge.P,ballYim_Y(ball.areaY*0.75),width/2-judge.T/2+(i+1)*judge.T/judge.P,ballYim_Y(ball.areaY*0.85));
+  
+  SetColer(judge1D);
+  rect(judge.backL[judge.racketP],ballYim_Y(ball.areaY*0.75),judge.backR[judge.racketP],ballYim_Y(ball.areaY*0.85));
+  SetColer(judge2D);
+  rect(judge.foreL[judge.racketP],ballYim_Y(ball.areaY*0.75),judge.foreR[judge.racketP],ballYim_Y(ball.areaY*0.85));
+  SetColer(judge3D);
+  rect(judge.foreL[judge.racketP],ballYim_Y(ball.areaY*0.75),judge.backR[judge.racketP],ballYim_Y(ball.areaY*0.85));
+  image(racket1,(judge.backL[judge.racketP]+judge.foreR[judge.racketP])/2,(table.Yb+ballYim_Y(ball.areaY*0.85))/2.0);
+  
+  rectMode(CENTER);
+}
 
+int nowJzone(BALL ball){
+  if(ballYim_Y(ball.areaY*0.75)<=ball.Ysdo&&ball.Ysdo<=ballYim_Y(ball.areaY*0.85)){
+    for(int i=2;i<=judge.P;i++)if(judge.backL[i]<=ball.X&&ball.X<=judge.foreR[i-1])return int(pow(2,i*2-3)+pow(2,i*2-2));
+    
+    for(int i=1;i<=judge.P;i++)if(judge.foreL[i]<=ball.X&&ball.X<=judge.backR[i])return int(pow(2,i*2-2)+pow(2,i*2-1));
+         
+    for(int i=1;i<=judge.P;i++)if(judge.backL[i]<=ball.X&&ball.X<=judge.backR[i])return int(pow(2,i*2-2));
+
+    for(int i=1;i<=judge.P;i++)if(judge.foreL[i]<=ball.X&&ball.X<=judge.foreR[i])return int(pow(2,i*2-1));
+
+  }
+  return 0;
+}
 
 

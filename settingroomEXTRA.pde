@@ -16,15 +16,7 @@ class BASE2{
   //ネットの広がり
     int NetW = -width/720;
   
-  //ボールの跳ね方
-    //球が跳ねる時の仮想空間上での台のY座標(台の上辺tableYim*n」の形にすることをお勧め)
-      float ballBound=tableYim*0.7;
-    //球が跳ねた瞬間の仮想空間上での上昇速度(高さを変える関数)
-      float ballZspeed=0.32;
-    //仮想空間上で球を打ち返した時のZ座標ズレ
-      float ballHZ=0.0;
-    //仮想空間上で球を打ち返した時のY座標ズレ
-      float ballHY=0.0;
+  
   // wiiリモコン
 
 }

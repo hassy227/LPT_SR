@@ -9,11 +9,10 @@ class ARDUINO{
   int lf = 10;
   
   ARDUINO(PApplet applet,String portNumber){
-    if(arduino){
-      port = new Serial(applet,portNumber,9600);
+    if(arduino)port = new Serial(applet,portNumber,9600);
       data = new String[2];
       data_int = new int[2];
-    }
+    
   } 
   void update(){
     if(port!=null){

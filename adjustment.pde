@@ -2,21 +2,22 @@
 class CREATING_RATE {
   int Xs=Base.Xshift;
   int Ys=Base.Yshift;
-  boolean O_I=true;//trueだと関数が起動させる、必要なくなったらfalseにする
+  boolean O_Isetup=true;//trueだとsetupが起動させる、必要なくなったらfalseにする
+  boolean O_Idraw =true; //trueだとdrawが起動させる、必要なくなったらfalseにする
   int WB=width*3/5+Base.Xshift;
 
   int o;
   int p;
 
   void adjestmentSetup() {
-    if (O_I) {
-      ball.YS=20.0;
-      ball.XS=10.0;
+    if (O_Isetup) {
+      ball.YS=600.0;
+      ball.XS=200.0;
     }
   }
 
   void adjestmentDraw() {
-    if (O_I) {
+    if (O_Idraw) {
       println(frameRate);
       stroke(192, 0, 0);
       fill(255, 64, 64);
@@ -80,11 +81,16 @@ class CREATING_RATE {
       2*pow(pow(ball.Xsdo-table.CE, 2)+pow(ball.Ysdo-table.CR, 2), 0.5));
       stroke(192, 0, 0);
       fill(255, 64, 64);
-
-      text(ballZim_mY(ballYim_ZimS(ball.Yim,ball.YS),ball.Ysdo), 100, 100);
-      text(ball.Zim,100,120);
-      text(ball.B, 100, 140);
-      text(ballYim_ZimS(ball.areaY*0.25, 1), 100, 160);
+     for(int i=0;i<judge.P;i++){
+      text(judge.foreL[i], judge.foreL[i], 800);
+      text(judge.foreR[i], judge.foreR[i], 850);
+      text(judge.backL[i], judge.backL[i], 800);
+      text(judge.backR[i], judge.backR[i], 850);
+     }
+      
+      
+      text(judge.nowJzone, 100, 140);
+      text(table.XB, 100, 160);
       line(table.CE, table.CR, ballXim_X(1000, ball.Ysdo), ball.Ysdo-ballZim_mY(50.0, ball.Ysdo));
       if (ball.Ysdo==ball.areaY*0.75)fill(0, 255, 0);
       //ellipse(ball.X, ball.Y, ball.B, ball.B);

@@ -26,10 +26,10 @@ class BALL{
 };
 class ENEMY{
   int LEVEL=0;
-  float MAXspeed;
-  float ADDspeed;
-  float speed;
-  float inertia;
+  float MAXspeed=0;
+  float ADDspeed=0;
+  float speed=0;
+  float inertia=0;
 }
 
 class TABLE{  //卓球台の情報
@@ -60,8 +60,28 @@ class TABLE{  //卓球台の情報
   
 }
 
-class RACKET{
-
+class JUDGEMENT{
+    int T = 0;//打ち判定の合計
+    int F = 0; //フォアの大きさ
+    int B = 0; //バックの大きさ
+    int O = 0;  //重なった場所
+    
+    int P = 0;//移動場所の数
+    
+    int foreR[];
+    int backR[];
+    int foreL[];
+    int backL[];
+    
+    JUDGEMENT(){
+      foreR = new int[Base.pointJ+1];
+      backR = new int[Base.pointJ+1];
+      foreL = new int[Base.pointJ+1];
+      backL = new int[Base.pointJ+1];
+    }
+    
+    int racketP=1;//ラケットの位置
+    int nowJzone;
 }
 //色情報の設定
 class DESIGN{
@@ -75,6 +95,14 @@ class DESIGN{
 }
 
 class LEVEL{
+  float Espeed    = 0.0;
+  float Einertia  = 0.0;
+  float BspeedMax = 0.0;
+  float BspeedMin = 0.0;
+}
+
+class NOWLEVEL{
+  int   level     = 0;
   float Espeed    = 0.0;
   float Einertia  = 0.0;
   float BspeedMax = 0.0;
