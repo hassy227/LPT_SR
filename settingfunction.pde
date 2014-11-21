@@ -5,6 +5,7 @@ void SetStructure(){
   ball  = new BALL();
   table = new TABLE();
   judge = new JUDGEMENT();
+  enemy = new ENEMY();
   
   backD    = new DESIGN();
   tableD   = new DESIGN();
@@ -17,45 +18,46 @@ void SetStructure(){
   judge4D  = new DESIGN();
   
   common = new LEVEL();
-   level1 = new LEVEL();
-   level2 = new LEVEL();
-   level3 = new LEVEL();
-   level4 = new LEVEL();
-   level5 = new LEVEL();
+   level = new LEVEL [6];
+   for(int i=0;i<=5;i++)level[i] = new LEVEL();
+   
   
   backgroundDSN(backD);
-  tableDSN(tableD);
-  netDSN(netD);
-  ballDSN(ballD);
-  ballsdoDSN(ballsdoD);
-  judge1DSN(judge1D);
-  judge2DSN(judge2D);
-  judge3DSN(judge3D);
-  judge4DSN(judge4D);
+  tableDSN     (tableD);
+  netDSN       (netD);
+  ballDSN      (ballD);
+  ballsdoDSN   (ballsdoD);
+  judge1DSN    (judge1D);
+  judge2DSN    (judge2D);
+  judge3DSN    (judge3D);
+  judge4DSN    (judge4D);
   
   COMMON(common);
-   LEVEL1(level1);
-   LEVEL2(level2);
-   LEVEL3(level3);
-   LEVEL4(level4);
-   LEVEL5(level5);
+   LEVEL1(level[1]);
+   LEVEL2(level[2]);
+   LEVEL3(level[3]);
+   LEVEL4(level[4]);
+   LEVEL5(level[5]);
   
   Resolution(Base,Base2);
   settingTable(table,Base,Base2);
   settingBall(ball,table,Base);
   settingJUDGEMENT(Base,judge);
   tableCenter();
+  
+  enemy.LEVEL = 2;
+  judge.nowRpoint = 2;
 }
 
 //解像度によって台やボールの表示の仕方を変える関数
 void Resolution(BASE Base,BASE2 Base2){
   if(Base2.resolutionX>0&&Base2.resolutionY>0){
     //画面比に合った台の下辺の長さ = 設定した台の下辺の長さ*(画面横の長さ/画面縦の長さ)/(元のディスプレイの横の長さ/元のディスプレイの縦の長さ)
-    Base.TABLEwidth =int(float(Base.TABLEwidth)*height*Base2.resolutionX/width/Base2.resolutionY);
-    Base.totalJ     =int(float(Base.totalJ    )*height*Base2.resolutionX/width/Base2.resolutionY);
-    Base.backJ      =int(float(Base.backJ     )*height*Base2.resolutionX/width/Base2.resolutionY);
-    Base.foreJ      =int(float(Base.foreJ     )*height*Base2.resolutionX/width/Base2.resolutionY);
-    Base.overlapJ   =int(float(Base.overlapJ  )*height*Base2.resolutionX/width/Base2.resolutionY);
+    Base.TABLEwidth=int(float(Base.TABLEwidth)*height*Base2.resolutionX/width/Base2.resolutionY);
+    Base.totalJ=int(float(Base.totalJ)*height*Base2.resolutionX/width/Base2.resolutionY);
+    Base.backJ=int(float(Base.backJ )*height*Base2.resolutionX/width/Base2.resolutionY);
+    Base.foreJ=int(float(Base.foreJ )*height*Base2.resolutionX/width/Base2.resolutionY);
+    Base.overlapJ=int(float(Base.overlapJ )*height*Base2.resolutionX/width/Base2.resolutionY);
     //ボールの大きさ調節
     //if(Base.BLbig!=-1)Base.BLbig=int(float(Base.BLbig)*height/Base2.resolutionY);
     //if(Base.BLsml!=-1)Base.BLsml=int(float(Base.BLsml)*height/Base2.resolutionY);
@@ -101,31 +103,13 @@ void settingJUDGEMENT(BASE Base,JUDGEMENT judge){
   judge.B = int(Base.backJ);
   judge.F = int(Base.foreJ);
   judge.O = int(Base.overlapJ);
-  judge.P = Base.pointJ;
+  judge.P = int(Base.pointJ);
   
-  
-  int NoOL=int((judge.T-(judge.P+1)*judge.O)/judge.P);
-  
+  int NoOL = int((judge.T-judge.O*(1.0+judge.P))/judge.P); 
   for(int i=1;i<=judge.P;i++){
-    judge.backL[i] = int((width/2.0-judge.T/2.0)+(judge.O + NoOL)*(i-1)                );
-    judge.backR[i] = int((width/2.0-judge.T/2.0)+(judge.O + NoOL)*(i-1)        +judge.B);
-    judge.foreL[i] = int((width/2.0-judge.T/2.0)+(judge.O + NoOL)*(i  )+judge.O-judge.F);
-    judge.foreR[i] = int((width/2.0-judge.T/2.0)+(judge.O + NoOL)*(i  )+judge.O        );
+    judge.backL[i] = int(width/2.0-judge.T/2.0        +(NoOL+judge.O)*(i-1));
+    judge.backR[i] = int(width/2.0-judge.T/2.0+judge.B+(NoOL+judge.O)*(i-1));
+    judge.foreL[i] = int(width/2.0-judge.T/2.0-judge.F+(NoOL+judge.O)*(i  )+judge.O);
+    judge.foreR[i] = int(width/2.0-judge.T/2.0        +(NoOL+judge.O)*(i  )+judge.O);
   }
-  /*
-  judge.back1L = int(width/2.0-judge.T/2.0        );
-  judge.back1R = int(width/2.0-judge.T/2.0+judge.B);
-  judge.fore1L = int(width/2.0-judge.T/6.0-judge.F+judge.O*2.0/3.0);
-  judge.fore1R = int(width/2.0-judge.T/6.0        +judge.O*2.0/3.0);
-
-  judge.back2L = int(width/2.0-judge.T/6.0        -judge.O*1.0/3.0);
-  judge.back2R = int(width/2.0-judge.T/6.0+judge.B-judge.O*1.0/3.0);
-  judge.fore2L = int(width/2.0+judge.T/6.0-judge.F+judge.O*1.0/3.0);
-  judge.fore2R = int(width/2.0+judge.T/6.0        +judge.O*1.0/3.0);
-  
-  judge.back3L = int(width/2.0+judge.T/6.0        -judge.O*2.0/3.0);
-  judge.back3R = int(width/2.0+judge.T/6.0+judge.B-judge.O*2.0/3.0);
-  judge.fore3L = int(width/2.0+judge.T/2.0-judge.F);
-  judge.fore3R = int(width/2.0+judge.T/2.0        );
-  */
 }

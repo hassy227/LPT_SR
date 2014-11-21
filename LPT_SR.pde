@@ -1,9 +1,8 @@
 
-
-float[] LEVELspeed = new float[5];
-float[] LEVELinertia= new float[5];
-boolean arduino = false;
-
+boolean arduino = false ;
+int gamestart=0;
+int timer=0;
+int xx,yy;
 //構造体(メイン)
   BASE2 Base2;
   BASE Base;
@@ -20,12 +19,9 @@ boolean arduino = false;
   TABLE table;
   BALL ball;
   CREATING_RATE rate;
+  ENEMY enemy;
    LEVEL common;
-   LEVEL level1;
-   LEVEL level2;
-   LEVEL level3;
-   LEVEL level4;
-   LEVEL level5;
+   LEVEL level[];
   ARDUINO heavy;
   JUDGEMENT judge; 
   
@@ -40,7 +36,7 @@ void setup() {
   imageMode(CENTER);
   textMode(CENTER);
   wiimote = new Wiimote(this);//Wiiリモコンを使うために必要な宣言！
-  heavy = new ARDUINO(this,"COM6");//圧力センサを使うために必要な宣言！
+  heavy = new ARDUINO(this,"COM5");//圧力センサを使うために必要な宣言！
   //台が横長にならないように設定
   SetStructure();
   rate =new CREATING_RATE();
@@ -51,9 +47,11 @@ void draw() {
   PFont font = createFont(Base2.FontName, Base2.FontSize); //フォントの設定 
   textFont(font, Base2.FontSize);
   
+  
   SetBack(backD);
   wiimote.update();
-  GameUpdate(table,ball);//変数の更新
+  if(gamestart==1)GameUpdate(table,ball);//変数の更新
+  enemymove(enemy);
   heavy.update();
   
   
@@ -61,45 +59,46 @@ void draw() {
   quad(table.Xtl, table.Yt, table.Xtr, table.Yt, 
   table.Xbr, table.Yb, table.Xbl, table.Yb);//卓球台の表示
   
-  
+  judge.nowRpoint=moveRacket();
   setJudgezone();
+  hit(judge);
   fill(255,0,0);
   
-
-  text("SPEED",width/5,height/2);
   textAlign(RIGHT);
-  text(abs(ball.YS*216000)/1000000,width/5+Base2.FontSize*6,height/2);
-  textAlign(LEFT);
-  text("km/h",width/5+Base2.FontSize*6,height/2);
-  BandN();
+  text("SPEED",width/5*4,height/2);
+  text("LEVEL",width/5*4,height/2+Base2.FontSize);
+  text("YOUPOINT",width/5,table.Yb);
+  text("ENEMYPOINT",width/10*3,table.Yt);
+  text(abs(ball.speed*60)/60,width/5*4+Base2.FontSize*6,height/2);
+  text(enemy.LEVEL          ,width/5*4+Base2.FontSize*6,height/2+Base2.FontSize);
+  textAlign(LEFT); 
+  for(int i=0;i<judge.Yscore;i++)text("○",width/5   +Base2.FontSize*i,table.Yb);
+  for(int i=0;i<judge.Escore;i++)text("○",width/10*3+Base2.FontSize*i,table.Yt);
+  
+  image(racket2,enemy.X,(ballYim_Y(ball.areaY*0.25)+ballYim_Y(ball.areaY*0.15))/2,
+  (ballYim_Y(ball.areaY*0.25)-ballYim_Y(ball.areaY*0.15))*4,(ballYim_Y(ball.areaY*0.25)-ballYim_Y(ball.areaY*0.15))*4);
+  
+  //text("m/m",width/5+Base2.FontSize*6,height/2);
+  
+  setJudgezone();
   //image(racket1,table.Xbl,(table.Yb+ballYim_Y(ball.areaY*0.85))/2.0);
   //image(racket1,(table.Xbl+table.Xbr)/2,(table.Yb+ballYim_Y(ball.areaY*0.85))/2.0);
-  // image(racket1,table.Xbr,(table.Yb+ballYim_Y(ball.areaY*0.85))/2.0);
-  
+  //image(racket1,table.Xbr,(table.Yb+ballYim_Y(ball.areaY*0.85))/2.0);
+  BandN();
+  pointCheck();
    rate.adjestmentDraw();//作業用の動作
+ opening();
 }
 void keyPressed(){
-  //
-  if(key=='j'){
-    if(judge.racketP==1&&(judge.nowJzone & int(pow(2,0)))==pow(2,0)){
-      
-    }
-    if(judge.racketP==2&&(judge.nowJzone & int(pow(2,2)))==pow(2,2)){
-    }
-    if(judge.racketP==3&&(judge.nowJzone & int(pow(2,4)))==pow(2,4)){
-    }
-  }
-  if(key=='k'){
-    if(judge.racketP==1&&(judge.nowJzone & int(pow(2,1)))==pow(2,1)){
-    }
-    if(judge.racketP==2&&(judge.nowJzone & int(pow(2,3)))==pow(2,3)){
-    }
-    if(judge.racketP==3&&(judge.nowJzone & int(pow(2,5)))==pow(2,5)){
-    }
-  }
-  if(key=='s')judge.racketP=1;
-  if(key=='d')judge.racketP=2;
-  if(key=='f')judge.racketP=3;
+  if(key=='j'&&(judge.nowJzone&int(pow(2,judge.nowRpoint*2  )))!=0)judge.hit=1+10*judge.nowRpoint;
+  if(key=='k'&&(judge.nowJzone&int(pow(2,judge.nowRpoint*2+1)))!=0)judge.hit=2+10*judge.nowRpoint;
+  
+  if(key=='s')judge.nowRpoint=1;
+  if(key=='d')judge.nowRpoint=2;
+  if(key=='f')judge.nowRpoint=3;
+  if((key=='j'||key=='k')&&gamestart==0)gamestart=1;
+  if((key=='j'||key=='k')&&gamestart>=3)gamestart=2;
+  
 }
 
 

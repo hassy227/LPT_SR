@@ -35,7 +35,8 @@ void GameUpdate(TABLE table,BALL ball){
   ball.X    = ballXim_X(ball.Xim,ball.Ysdo);
   ball.B    = ballBIG(ballYim_Y(ball.Yim));
   
-  judge.nowJzone=nowJzone(ball);
+  judge.nowJzone=nowJzone();
+  levelsetting(level[enemy.LEVEL]);
   
 }
 
@@ -102,19 +103,20 @@ void tableCenter(){
 }
 //ボールとネットの表示（タイミングを変えるため）
 void BandN(){
+  
   if(ball.Yim<ball.areaY/2){
     SetColer(ballsdoD);
-    ellipse(ball.Xsdo, ball.Ysdo, ball.B, ball.B);
+   if(gamestart==1) ellipse(ball.Xsdo, ball.Ysdo, ball.B, ball.B);
     SetColer(netD);
     quad(table.LXl,table.LY,table.LXr,table.LY
       ,table.LXr+table.NW,table.LY-table.NH,table.LXl-table.NW,table.LY-table.NH);//中央線の表示
      SetColer(ballD);
-    ellipse(ball.X, ball.Y, ball.B, ball.B);
+    if(gamestart==1)ellipse(ball.X, ball.Y, ball.B, ball.B);
   }else{
     SetColer(ballsdoD);
-    ellipse(ball.Xsdo, ball.Ysdo, ball.B, ball.B);
+    if(gamestart==1)ellipse(ball.Xsdo, ball.Ysdo, ball.B, ball.B);
     SetColer(ballD);
-    ellipse(ball.X, ball.Y, ball.B, ball.B);
+    if(gamestart==1)ellipse(ball.X, ball.Y, ball.B, ball.B);
     SetColer(netD);
     quad(table.LXl,table.LY,table.LXr,table.LY
       ,table.LXr+table.NW,table.LY-table.NH,table.LXl-table.NW,table.LY-table.NH);//中央線の表示
@@ -125,31 +127,70 @@ void BandN(){
 void setJudgezone(){
   rectMode(CORNERS);
   SetColer(judge4D);
-  for(int i=0;i<judge.P;i++)rect(width/2-judge.T/2+i*judge.T/judge.P,ballYim_Y(ball.areaY*0.75),width/2-judge.T/2+(i+1)*judge.T/judge.P,ballYim_Y(ball.areaY*0.85));
-  
+  for(int i=1;i<=judge.P;i++){
+    rect(width/2-judge.T/2+judge.T/judge.P*(i-1),ballYim_Y(ball.areaY*0.75),width/2-judge.T/2+judge.T/judge.P*i,ballYim_Y(ball.areaY*0.85));
+  }
   SetColer(judge1D);
-  rect(judge.backL[judge.racketP],ballYim_Y(ball.areaY*0.75),judge.backR[judge.racketP],ballYim_Y(ball.areaY*0.85));
+  rect(judge.backL[judge.nowRpoint],ballYim_Y(ball.areaY*0.75),judge.backR[judge.nowRpoint],ballYim_Y(ball.areaY*0.85));
   SetColer(judge2D);
-  rect(judge.foreL[judge.racketP],ballYim_Y(ball.areaY*0.75),judge.foreR[judge.racketP],ballYim_Y(ball.areaY*0.85));
+  rect(judge.foreL[judge.nowRpoint],ballYim_Y(ball.areaY*0.75),judge.foreR[judge.nowRpoint],ballYim_Y(ball.areaY*0.85));
   SetColer(judge3D);
-  rect(judge.foreL[judge.racketP],ballYim_Y(ball.areaY*0.75),judge.backR[judge.racketP],ballYim_Y(ball.areaY*0.85));
-  image(racket1,(judge.backL[judge.racketP]+judge.foreR[judge.racketP])/2,(table.Yb+ballYim_Y(ball.areaY*0.85))/2.0);
+  rect(judge.foreL[judge.nowRpoint],ballYim_Y(ball.areaY*0.75),judge.backR[judge.nowRpoint],ballYim_Y(ball.areaY*0.85));
+  if(judge.hit==1){
+    fill(255,64,64);
+    rect(judge.backL[judge.nowRpoint],ballYim_Y(ball.areaY*0.75),judge.backR[judge.nowRpoint],ballYim_Y(ball.areaY*0.85));
+    fill(255,64,128);
+    rect(judge.foreL[judge.nowRpoint],ballYim_Y(ball.areaY*0.75),judge.backR[judge.nowRpoint],ballYim_Y(ball.areaY*0.85));
+  }
+  if(judge.hit==2){
+    fill(64,64,255);
+    rect(judge.foreL[judge.nowRpoint],ballYim_Y(ball.areaY*0.75),judge.foreR[judge.nowRpoint],ballYim_Y(ball.areaY*0.85));
+    fill(128,64,255);
+    rect(judge.foreL[judge.nowRpoint],ballYim_Y(ball.areaY*0.75),judge.backR[judge.nowRpoint],ballYim_Y(ball.areaY*0.85));
+  }
+  imageMode(CENTER);
+  image(racket1,(judge.foreR[judge.nowRpoint]+judge.backL[judge.nowRpoint])/2,(ballYim_Y(ball.areaY*0.75)+ballYim_Y(ball.areaY*0.85))/2
+  ,(ballYim_Y(ball.areaY*0.75)+ballYim_Y(ball.areaY*0.85))/8,(ballYim_Y(ball.areaY*0.75)+ballYim_Y(ball.areaY*0.85))/8);
   
   rectMode(CENTER);
 }
 
-int nowJzone(BALL ball){
-  if(ballYim_Y(ball.areaY*0.75)<=ball.Ysdo&&ball.Ysdo<=ballYim_Y(ball.areaY*0.85)){
-    for(int i=2;i<=judge.P;i++)if(judge.backL[i]<=ball.X&&ball.X<=judge.foreR[i-1])return int(pow(2,i*2-3)+pow(2,i*2-2));
-    
-    for(int i=1;i<=judge.P;i++)if(judge.foreL[i]<=ball.X&&ball.X<=judge.backR[i])return int(pow(2,i*2-2)+pow(2,i*2-1));
-         
-    for(int i=1;i<=judge.P;i++)if(judge.backL[i]<=ball.X&&ball.X<=judge.backR[i])return int(pow(2,i*2-2));
-
-    for(int i=1;i<=judge.P;i++)if(judge.foreL[i]<=ball.X&&ball.X<=judge.foreR[i])return int(pow(2,i*2-1));
-
+int nowJzone(){
+  if(ballYim_Y(ball.areaY*0.75)<=ball.Ysdo&&ball.Ysdo<=ballYim_Y(ball.areaY*0.85)&&ball.YS>0){
+    for(int i=2;i<=judge.P;i++){
+      if(judge.backL[i]<=ball.Xsdo&&ball.Xsdo<=judge.foreR[i-1])return int(pow(2,i*2-1)+pow(2,i*2));
+    }
+    for(int i=1;i<=judge.P;i++){
+      if(judge.foreL[i]<=ball.Xsdo&&ball.Xsdo<=judge.backR[i])return int(pow(2,i*2)+pow(2,i*2+1));
+    }
+    for(int i=1;i<=judge.P;i++){
+      if(judge.backL[i]<=ball.Xsdo&&ball.Xsdo<=judge.backR[i])return int(pow(2,i*2));
+      if(judge.foreL[i]<=ball.Xsdo&&ball.Xsdo<=judge.foreR[i])return int(pow(2,i*2+1));
+    }
   }
   return 0;
 }
 
+void levelsetting(LEVEL level){
+  if(common.Eaddspeed!=0){
+    enemy.ADDspeed=common.Eaddspeed;
+  }else{
+    enemy.ADDspeed=level .Eaddspeed;
+  }
+  if(common.Einertia!=0){
+    enemy.inertia=common.Einertia;
+  }else{
+    enemy.inertia=level .Einertia;
+  }
+  if(common.BspeedMax!=0){
+    ball.hiS=common.BspeedMax;
+  }else{
+    ball.hiS=level.BspeedMax;
+  }
+  if(common.BspeedMin!=0){
+    ball.lowS=common.BspeedMin;
+  }else{
+    ball.lowS=level .BspeedMin;
+  }
+}
 

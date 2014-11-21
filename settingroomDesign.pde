@@ -48,35 +48,35 @@ void ballsdoDSN(DESIGN design){
     design.B = 0;
    design.I = 255;
 }
-//バックが打てる場所
+
 void judge1DSN(DESIGN design){
    design.W = -1;
-    design.R = 128;
-    design.G = 128;
+    design.R = 64;
+    design.G = 64;
     design.B = 192;
    design.I = 255;  
 }
-//フォアが打てる場所
+
 void judge2DSN(DESIGN design){
    design.W = -1;
     design.R = 192;
-    design.G = 128;
-    design.B = 128;
+    design.G = 64;
+    design.B = 64;
    design.I = 255;
 }
-//バックとフォアが打てる場所
+
 void judge3DSN(DESIGN design){
    design.W = -1;
     design.R = 192;
-    design.G = 128;
+    design.G = 64;
     design.B = 192;
-   design.I = 255;
+   design.I = 255;  
 }
-//その位置では打てない場所
+
 void judge4DSN(DESIGN design){
-   design.W = 192;
-    design.R = 224;
-    design.G = 96;
-    design.B = 224;
+   design.W = 255;
+    design.R = 0;
+    design.G = 0;
+    design.B = 0;
    design.I = 255;
 }

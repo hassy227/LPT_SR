@@ -12,13 +12,17 @@ class BALL{
   float Yim=0;      //ボールの仮想空間上のy座標
   float Zim=0;      //ボールの仮想空間上のz座標
   
+  float speed=0;    //ボールのスピード 
   float XS=0;       //ボールのxスピード
   float YS=0;       //ボールのyスピード
   float ZS=0;       //ボールのzスピード
   
+  float hiS=0;      //高速スピード
+  float lowS=0;     //低速スピード
+  
   float big;        //ボールの大きさ
   float sml;        //ボールの大きさ  
-  float Dsp;
+  
   
   float areaY;      //ボールが動けるy座標の長さ（仮想）
   float areaYtop;   //ボールが動けるy座標の上辺（画面）
@@ -26,6 +30,8 @@ class BALL{
 };
 class ENEMY{
   int LEVEL=0;
+  int X=0;
+  float Xim=0;
   float MAXspeed=0;
   float ADDspeed=0;
   float speed=0;
@@ -65,23 +71,25 @@ class JUDGEMENT{
     int F = 0; //フォアの大きさ
     int B = 0; //バックの大きさ
     int O = 0;  //重なった場所
-    
-    int P = 0;//移動場所の数
+    int P = 0;//ラケットの移動数
     
     int foreR[];
     int backR[];
     int foreL[];
     int backL[];
-    
     JUDGEMENT(){
-      foreR = new int[Base.pointJ+1];
-      backR = new int[Base.pointJ+1];
-      foreL = new int[Base.pointJ+1];
-      backL = new int[Base.pointJ+1];
+     foreR = new int[Base.pointJ+1];
+     backR = new int[Base.pointJ+1];
+     foreL = new int[Base.pointJ+1];
+     backL = new int[Base.pointJ+1];
     }
     
-    int racketP=1;//ラケットの位置
+    int nowRpoint;
     int nowJzone;
+    int hit;
+    
+    int Yscore=0;
+    int Escore=0;
 }
 //色情報の設定
 class DESIGN{
@@ -95,7 +103,7 @@ class DESIGN{
 }
 
 class LEVEL{
-  float Espeed    = 0.0;
+  float Eaddspeed = 0.0;
   float Einertia  = 0.0;
   float BspeedMax = 0.0;
   float BspeedMin = 0.0;

@@ -15,6 +15,7 @@ class BASE{
   int Yshift=0;
   
 //ボールの跳ね方
+  
   //球が跳ねる時の仮想空間上での台のY座標(台の上辺tableYim*n」の形にすることをお勧め)
     float ballBound=Base2.tableYim*0.85;
   //球が跳ねた瞬間の仮想空間上での上昇速度(高さを変える関数)
@@ -25,22 +26,19 @@ class BASE{
     float ballHY=0.0;
   
 //打ち判定
-  //移動する位置
-    int pointJ = 5; 
+  //位置の数
+    int pointJ = 3;
   //打ち判定のxの長さ
     int totalJ=TABLEwidth*5/3;
   //バックの長さ
-    int backJ=totalJ/8;
+    int backJ=totalJ/4;
   //フォアの長さ
-    int foreJ=totalJ/8;
+    int foreJ=totalJ/4;
   //判定の重なり
-   int overlapJ=totalJ/40;  
+   int overlapJ=totalJ/32;  
   
-//ボールの大きさ(上辺に来るとき:-1にすると下辺の大きさから台の比率で合わせられる
+//ボールの大きさ(上辺に来るとき:-1にすると下辺の大きさから台の比率で合わせられる)
   int BLsml=-1;
 //ボールの大きさ(下辺に来るとき:-1にすると上辺の大きさから台の比率で合わせられる)
-  int BLbig=int(TABLEwidth*40*1.4/Base2.tableXim);
-  
-  
-  
+  int BLbig=int(TABLEwidth*30*1.4/Base2.tableXim);
 };
