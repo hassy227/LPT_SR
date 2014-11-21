@@ -6,42 +6,42 @@
  */
 //共通（ここで設定した各項目はすべての難易度で共通になる:適用しないなら0） 
 void COMMON(LEVEL level){
-  level.Espeed    = 0.0;
-  level.Einertia  = 0.0;
-  level.BspeedMax = 0.0;
-  level.BspeedMin = 0.0;
+  level.Eaddspeed = 1.0;
+  level.Einertia  = 0.01;
+  level.BspeedMax = 60.0;
+  level.BspeedMin = 30.0;
 }
 //レベル１
 void LEVEL1(LEVEL level){
-  level.Espeed    = 0.0;
+  level.Eaddspeed = 0.0;
   level.Einertia  = 0.0;
   level.BspeedMax = 0.0;
   level.BspeedMin = 0.0;
 }
 //レベル２
 void LEVEL2(LEVEL level){
-  level.Espeed    = 0.0;
+  level.Eaddspeed = 0.0;
   level.Einertia  = 0.0;
   level.BspeedMax = 0.0;
   level.BspeedMin = 0.0;
 }
 //レベル３
 void LEVEL3(LEVEL level){
-  level.Espeed    = 0.0;
+  level.Eaddspeed  = 0.0;
   level.Einertia  = 0.0;
   level.BspeedMax = 0.0;
   level.BspeedMin = 0.0;
 }
 //レベル４
 void LEVEL4(LEVEL level){
-  level.Espeed    = 0.0;
+  level.Eaddspeed = 0.0;
   level.Einertia  = 0.0;
   level.BspeedMax = 0.0;
   level.BspeedMin = 0.0;
 }
 //レベル５
 void LEVEL5(LEVEL level){
-  level.Espeed    = 0.0;
+  level.Eaddspeed    = 0.0;
   level.Einertia  = 0.0;
   level.BspeedMax = 0.0;
   level.BspeedMin = 0.0;
